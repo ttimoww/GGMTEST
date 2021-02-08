@@ -1,4 +1,5 @@
-import { getAllCategories } from './../lib/categories.js'
+import { useQuery } from '@apollo/react-hooks';
+import { ALL_CATEGORIES } from './../gql/categories'
 
 export default function Category(){
     return(
@@ -12,7 +13,17 @@ export default function Category(){
  * In this function, we need to return a list of possible values for id.
  */
 export async function getStaticPaths() {
-    const paths = getAllCategories()
+    const data = useQuery(ALL_CATEGORIES);
+    const paths = [];
+
+    data.categoryList[0].children.forEach(category => {
+      paths.push({
+        params: {
+          category: category.url_path,
+        }
+      })
+    });
+
     return {
       paths,
       // Info about fallback: https://nextjs.org/learn/basics/dynamic-routes/dynamic-routes-details
