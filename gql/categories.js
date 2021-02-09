@@ -25,6 +25,10 @@ export async function getCategoryData(slug){
           query GetCategory($url_key: String!){
               categoryList(filters: {url_key: {eq: $url_key}}) {
                 name
+                meta_description
+                meta_keywords
+                meta_title
+                description
                 products {
                   items {
                     id
@@ -34,6 +38,10 @@ export async function getCategoryData(slug){
                     }
                     url_key
                     name
+                    meta_description
+                    description {
+                      html
+                    }
                   }
                 }
               }

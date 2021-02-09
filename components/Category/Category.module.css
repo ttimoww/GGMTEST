@@ -1,0 +1,13 @@
+.productGrid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.CategoryProduct{
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+.CategoryProduct img{
+    width: 100%;
+}
