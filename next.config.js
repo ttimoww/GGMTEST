@@ -1,5 +1,5 @@
 module.exports = {
     images: {
-      domains: ['stage.goedgemerkt.nl'],
+      domains: ['static.goedgemerkt.nl'],
     },
   }
