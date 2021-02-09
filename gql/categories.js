@@ -44,7 +44,7 @@ export async function getCategoryData(slug){
           }
       `,
       variables: {
-        url_key: 'ggm-it-test'
+        url_key: slug
       }
       });
 
