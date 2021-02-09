@@ -1,29 +1,50 @@
-import gql from 'graphql-tag';
+import { gql } from '@apollo/client';
+import client from './../lib/apolloClient'
 
-export function getAllCategories(){
-    return ([
-    {
-      params: {
-        category: 'naamstickers',
-        magentoId: 1,
-      }
-    },
-    {
-      params: {
-        category: 'kledingstickers',
-        magentoId: 2,
-      }
-    }
-  ])
+export async function getAllCategories(){
+    const { data } = await client.query({
+        query: gql`
+          query AllCategories {
+            categoryList {
+                children {
+                  id
+                  name
+                  url_path
+                }
+              }
+            }
+        `
+      });
+
+    return data;
 }
 
-export const ALL_CHARACTERS = gql`
-    query allCharacters {
-        characters {
-            results {
-                id
+export async function getCategoryData(slug){
+    const { data } = await client.query({
+        query: gql`
+          query GetCategory($url_key: String!){
+              categoryList(filters: {url_key: {eq: $url_key}}) {
                 name
-            }
-        }
-    }
-`;
+                products {
+                  items {
+                    id
+                    small_image {
+                      url
+                      label
+                    }
+                    url_key
+                    name
+                  }
+                }
+              }
+          }
+      `,
+      variables: {
+        url_key: slug
+      }
+      });
+
+    return data;
+}
+
+  

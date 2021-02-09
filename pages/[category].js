@@ -1,19 +1,16 @@
-import { useQuery } from '@apollo/react-hooks';
-import { ALL_CATEGORIES } from './../gql/categories'
+import { getAllCategories, getCategoryData } from './../gql/categories'
+import {default as CategoryComponent} from './../components/Category/Category'
 
-export default function Category(){
-    return(
-        <div className="Category">
-            <span>category</span>
-        </div>
-    )
+export default function Category({ data }){
+    return <CategoryComponent data={data} />
 }
 
 /**
  * In this function, we need to return a list of possible values for id.
  */
 export async function getStaticPaths() {
-    const data = useQuery(ALL_CATEGORIES);
+    const data = await getAllCategories();
+
     const paths = [];
 
     data.categoryList[0].children.forEach(category => {
@@ -36,10 +33,11 @@ export async function getStaticPaths() {
  * `getStaticProp`s is given `params`, which contains id (because the file name is [id].js)
  */
 export async function getStaticProps({ params }) {
-    //const postData = await getPostData(params.id)
+    const data = await getCategoryData(params.category);
+
     return {
       props: {
-        //postData
-      }
+        data: data
     }
   }
+}
