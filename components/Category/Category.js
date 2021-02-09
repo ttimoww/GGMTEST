@@ -13,7 +13,7 @@ export default function Category({ data, time }){
                 <title>{data.meta_title}</title>
             </Head>
             <div className="Category">
-                <h1>{data.name}  - {time}</h1>
+                <h1>{data.name} (Last generated HTML: {time})</h1>
                 <p>{data.description}</p>
             </div>
             <div className={styles.productGrid}>
