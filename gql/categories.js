@@ -31,7 +31,6 @@ export async function getCategoryData(slug){
                 description
                 products {
                   items {
-                    id
                     small_image {
                       url
                       label
@@ -39,20 +38,20 @@ export async function getCategoryData(slug){
                     url_key
                     name
                     meta_description
-                    description {
-                      html
-                    }
                   }
                 }
               }
           }
       `,
       variables: {
-        url_key: slug
+        url_key: 'ggm-it-test'
       }
       });
 
     return data;
 }
 
+export function now(){
+  return new Date().toLocaleTimeString();
+}
   

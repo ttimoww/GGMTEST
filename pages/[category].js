@@ -1,8 +1,8 @@
-import { getAllCategories, getCategoryData } from './../gql/categories'
+import { getAllCategories, getCategoryData, now } from './../gql/categories'
 import {default as CategoryComponent} from './../components/Category/Category'
 
-export default function Category({ data }){
-    return <CategoryComponent data={data} />
+export default function Category({ data, time }){
+    return <CategoryComponent data={data} time={time} />
 }
 
 /**
@@ -34,10 +34,12 @@ export async function getStaticPaths() {
  */
 export async function getStaticProps({ params }) {
     const data = await getCategoryData(params.category);
-
+    const time = now();
     return {
       props: {
-        data: data
+        data: data,
+        time: time
+      },
+      revalidate: 60
     }
-  }
 }
