@@ -22,7 +22,7 @@ export async function getStaticPaths() {
     });
 
     return {
-      paths,
+      paths: paths,
       // Info about fallback: https://nextjs.org/learn/basics/dynamic-routes/dynamic-routes-details
       fallback: false
     }
